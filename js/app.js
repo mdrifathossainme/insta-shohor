@@ -165,3 +165,5 @@ const loadPosts = async () =>{
 }
 
 loadPosts();
+
+console.log('check')
