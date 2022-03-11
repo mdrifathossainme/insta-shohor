@@ -4,7 +4,8 @@ const likedPostsId = [];
 const reportedPostsId = [];
 
 const getLikedPosts = () => {
-    return posts.filter((post) => likedPostsId.includes(post.id));
+    return posts.filter((post) => 
+    likedPostsId.includes(post.id));
 };
 
 const getReportedPosts = () => {
@@ -17,6 +18,7 @@ const isLiked = (id) => {
 
 const addToLiked = (id) => {
     likedPostsId.push(id); 
+
     showPosts(posts);
 };
 
@@ -36,11 +38,13 @@ const switchTab = (id) => {
         document.getElementById( "liked" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
     } else if (id === "liked") {
+      
         document.getElementById( "liked" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
         document.getElementById( "reported" ).style.display = "none";
 
         displayLikedPosts();
+        
     } else {
         document.getElementById( "reported" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
@@ -52,7 +56,7 @@ const switchTab = (id) => {
 
 const createPost = (post) => {
     const image = post.image;
-    console.log(post)
+    // console.log(post)
    
     const div = document.createElement( "article" );
     div.classList.add( "post" );
@@ -135,6 +139,7 @@ const createPost = (post) => {
 };
 
 const showPosts = (posts) => {
+  
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
 
@@ -144,20 +149,25 @@ const showPosts = (posts) => {
     });
 };
 
-const displayLikedPosts = () => {
+const displayLikedPosts = () => { 
+  const likePost = document.getElementById( "liked" );
+       likePost.innerHTML = "";
     const likedPosts = getLikedPosts();
     likedPosts.forEach((post) => {
         const div = createPost(post);
-        document.getElementById( "liked" ).appendChild(div);
+        likePost.appendChild(div);
     });
 };
 
-const displayReportedPosts = () => {
+const displayReportedPosts = () => {  
+  const reportedPost = document.getElementById( "reported" );
+  reportedPost.innerHTML = "";
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    reportedPosts.forEach((post) => {
         const div = createPost(post);
-        document.getElementById( "reported" ).appendChild(div);
+        reportedPost.appendChild(div);
     });
+   
 };
 
 const loadPosts = async () =>{
